@@ -71,4 +71,4 @@ Passwords are hashed. Customer report and appointment routes enforce ownership c
 `assets/original_reference_screenshots.zip` contains the screenshots supplied for this recreation.
 
 ## Author
-Built by Prasanna as part of the MERN Stack journey.
+Built by Prasanna as part of the College Project journey.
