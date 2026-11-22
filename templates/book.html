@@ -1,0 +1,21 @@
+{% extends 'base.html' %}{% block title %}Book soil test | LoamLab{% endblock %}
+{% block content %}
+<section class="page"><div class="wrap formwrap">
+  <div class="eyebrow rv">New test request</div>
+  <h1 class="title gt">Book a soil test.</h1>
+  <p class="sub rv" data-i="1">Share your sample details. The laboratory team will confirm collection arrangements.</p>
+  <form method="post" class="glass rv formgrid" data-i="2" style="margin-top:30px;padding:34px">
+    <label>Farm / plot name<input name="farm_name" placeholder="e.g. North field"></label>
+    <label>Crop grown / planned<input name="crop" placeholder="e.g. Rice, arecanut"></label>
+    <label class="full">Sample location / address<textarea name="address" required rows="2" placeholder="Village, taluk, district"></textarea></label>
+    <label>District<input name="district"></label>
+    <label>State<input name="state"></label>
+    <label>Sample type<select name="sample_type"><option>Soil</option><option>Compost</option><option>Irrigation water</option></select></label>
+    <label>Farm area (acres)<input name="area_acres" type="number" min="0" step="0.01"></label>
+    <label>Preferred sample date<input name="sample_date" type="date"></label>
+    <label>Test panel<select name="panel" required>{% for p in panels %}<option {{ 'selected' if p==selected }}>{{ p }}</option>{% endfor %}</select></label>
+    <label class="full">Additional notes<textarea name="notes" rows="3" placeholder="Crop stage, access instructions or sample details"></textarea></label>
+    <div class="full"><button class="btn">Submit test request ↗</button></div>
+  </form>
+</div></section>
+{% endblock %}

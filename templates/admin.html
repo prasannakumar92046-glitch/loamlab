@@ -1,0 +1,40 @@
+{% extends 'base.html' %}{% from '_macros.html' import badge, track with context %}{% block title %}Lab Admin Console | LoamLab{% endblock %}
+{% block content %}
+<section class="page"><div class="wrap">
+  <div class="pagehead">
+    <div><div class="eyebrow rv">Lab operations</div><h1 class="gt">Sample queue</h1><p class="muted rv" data-i="1">Review bookings, advance sample stages and publish verified results.</p></div>
+  </div>
+  <div class="metrics">
+    <div class="glass metric rv" data-i="0"><small>Total samples</small><b>{{ total }}</b></div>
+    <div class="glass metric rv" data-i="1"><small>Pending collection</small><b>{{ pending }}</b></div>
+    <div class="glass metric rv" data-i="2"><small>In analysis</small><b>{{ in_lab }}</b></div>
+    <div class="glass metric rv" data-i="3"><small>Reports issued</small><b>{{ reports }}</b></div>
+  </div>
+  <div class="chips rv">
+    <a class="fchip {{ 'on' if not filter_status }}" href="{{ url_for('admin_dashboard', q=q) }}">All</a>
+    {% for s in statuses %}<a class="fchip {{ 'on' if filter_status==s }}" href="{{ url_for('admin_dashboard', status=s, q=q) }}">{{ s }}</a>{% endfor %}
+    <form method="get">{% if filter_status %}<input type="hidden" name="status" value="{{ filter_status }}">{% endif %}<input name="q" value="{{ q }}" placeholder="Search reference, customer or email"></form>
+  </div>
+  {% if rows %}
+  <div class="stack">
+  {% for a in rows %}
+    <article class="glass acard qrow rv">
+      <div class="head">
+        <div><div class="ref"><span>{{ a.code }}</span>{{ badge(a.status) }}<span>{{ a.customer_name }}{% if a.phone %} · {{ a.phone }}{% endif %}</span></div>
+          <h2>{{ a.panel }} — {{ a.customer_name }}</h2>
+          <div class="meta"><span>{{ a.farm_name or 'Farm / plot' }}</span><span>{{ a.district or a.state or a.address }}</span>{% if a.area_acres %}<span>{{ a.area_acres }} acres</span>{% endif %}{% if a.sample_date %}<span>Preferred {{ a.sample_date }}</span>{% endif %}</div></div>
+        <div class="qactions">
+          {% if NEXT_STAGE.get(a.status) %}
+          <form method="post" action="{{ url_for('admin_appointment',aid=a.id) }}"><input type="hidden" name="action" value="status"><input type="hidden" name="status" value="{{ NEXT_STAGE[a.status] }}"><input type="hidden" name="back" value="queue"><button class="btn ghost xs">→ {{ NEXT_STAGE[a.status] }}</button></form>
+          {% endif %}
+          <a class="btn xs" href="{{ url_for('admin_appointment',aid=a.id) }}">{{ 'Edit report' if a.report_no else 'Upload report' }} ↗</a>
+          {% if a.report_no %}<a class="btn ghost xs" href="{{ url_for('report_pdf_view',aid=a.id) }}">PDF ↓</a>{% endif %}
+        </div>
+      </div>
+      {{ track(a.status, pcts[a.id]) }}
+    </article>
+  {% endfor %}
+  </div>
+  {% else %}<div class="empty"><h2>No matching records.</h2><p class="muted">Try another filter or search term.</p></div>{% endif %}
+</div></section>
+{% endblock %}

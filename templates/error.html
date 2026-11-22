@@ -1,0 +1,2 @@
+{% extends 'base.html' %}{% block title %}Error {{ code }} | LoamLab{% endblock %}
+{% block content %}<section class="page"><div class="wrap formwrap"><div class="eyebrow">Error {{ code }}</div><h1 class="title gt">That page isn't available.</h1><p class="sub">{{ message }}</p><p style="margin-top:26px"><a class="btn" href="{{ url_for('home') }}">Return home</a></p></div></section>{% endblock %}

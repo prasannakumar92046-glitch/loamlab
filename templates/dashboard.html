@@ -1,0 +1,33 @@
+{% extends 'base.html' %}{% from '_macros.html' import badge, track, results with context %}{% block title %}My soil tests | LoamLab{% endblock %}
+{% block content %}
+<section class="page"><div class="wrap">
+  <div class="pagehead">
+    <div><div class="eyebrow rv">Customer portal</div><h1 class="gt">My soil tests</h1><p class="muted rv" data-i="1">Hello {{ user.name.split(' ')[0] }} — your bookings, sample progress and laboratory reports.</p></div>
+    <a class="btn rv" data-i="2" href="{{ url_for('book') }}">＋ New booking</a>
+  </div>
+  {% if items %}
+  <div class="stack">
+  {% for it in items %}{% set a=it.a %}
+    <article class="glass acard rv">
+      <div class="head">
+        <div><div class="ref"><span>{{ a.code }}</span>{{ badge(a.status) }}</div>
+          <h2>{{ a.panel }}</h2>
+          <div class="meta"><span>{{ a.farm_name or 'Farm / plot' }}</span>{% if a.area_acres %}<span>{{ a.area_acres }} acres</span>{% endif %}{% if a.district or a.state %}<span>{{ a.district or a.state }}</span>{% endif %}{% if a.sample_date %}<span>Preferred {{ a.sample_date }}</span>{% endif %}</div>
+          {% if a.notes %}<p class="quote">“{{ a.notes }}”</p>{% endif %}</div>
+        {% if a.status=='Requested' %}<form method="post" action="{{ url_for('cancel_appointment',aid=a.id) }}" onsubmit="return confirm('Cancel this request?')"><button class="btn danger xs">✕ Cancel</button></form>{% endif %}
+      </div>
+      {{ track(a.status, it.pct) }}
+      {% if it.view %}{{ results(it.view, a.interpretation) }}{% endif %}
+      <div class="actions">
+        <a class="linkarrow" href="{{ url_for('appointment',aid=a.id) }}">View details <span>↗</span></a>
+        {% if a.report_no %}<a class="btn sm" href="{{ url_for('report_pdf_view',aid=a.id) }}">Download PDF report ↓</a>{% endif %}
+        <small class="mono muted" style="margin-left:auto;font-size:9.5px">Updated {{ a.updated_at[:10] }}</small>
+      </div>
+    </article>
+  {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty rv"><h2>No soil tests yet.</h2><p class="muted">Start a booking to begin your sample journey.</p><a class="btn" href="{{ url_for('book') }}">Book soil test</a></div>
+  {% endif %}
+</div></section>
+{% endblock %}

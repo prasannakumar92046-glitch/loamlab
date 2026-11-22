@@ -1,0 +1,22 @@
+{% extends 'base.html' %}{% from '_macros.html' import badge, track, results with context %}{% block title %}{{ a.code }} | LoamLab{% endblock %}
+{% block content %}
+<section class="page"><div class="wrap">
+  <div class="pagehead">
+    <div><div class="eyebrow rv">Sample tracking · {{ a.code }}</div><h1 class="gt">{{ a.panel }}</h1><p class="muted rv" data-i="1">{{ a.farm_name or 'Farm / plot' }} · {{ a.address }}</p></div>
+    <div class="rv" data-i="2">{{ badge(a.status) }}</div>
+  </div>
+  <div class="stack">
+    <section class="glass acard rv"><h2 style="font-size:22px">5-stage real-time sample tracker</h2><p class="muted" style="margin:0">Each step is recorded by the laboratory team.</p>
+      {{ track(a.status, pct) }}
+      <div class="timeline">{% for x in logs %}<div class="event"><i></i><div><b>{{ x.status }}</b><small>{{ x.created_at[:16].replace('T',' ') }}</small>{% if x.note %}<p>{{ x.note }}</p>{% endif %}</div></div>{% endfor %}</div>
+    </section>
+    {% if report %}
+    <section class="glass acard rv"><div class="head"><div><div class="eyebrow">Laboratory report ready</div><h2>Report {{ report.report_no }}</h2><p class="muted" style="margin:0">Tested {{ report.tested_on or 'date not recorded' }}</p></div>{{ badge('Completed') if a.status=='Completed' else '' }}</div>
+      {{ results(view, report.interpretation) }}
+      <div class="actions"><a class="btn" href="{{ url_for('report_pdf_view',aid=a.id) }}">Download professional PDF report ↓</a>{% if report.attachment %}<a class="btn ghost" href="{{ url_for('attachment',aid=a.id) }}">Download supporting lab file</a>{% endif %}</div>
+    </section>
+    {% endif %}
+  </div>
+  <p style="margin-top:26px"><a class="linkarrow" href="{{ url_for('dashboard') }}">← My soil tests</a></p>
+</div></section>
+{% endblock %}

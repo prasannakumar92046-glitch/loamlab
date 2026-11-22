@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- ═════════ HERO ═════════ -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow rv" data-i="0">Soil testing appointment &amp; report access portal</div>
+      <h1 class="gt">Decoding the<br>Earth's Living<br><em>Microbiome.</em></h1>
+      <p class="lead rv" data-i="2">Book certified laboratory soil analysis. Track your sample live through five diagnostic stages — from field core sampling to a pH and N-P-K report on your dashboard.</p>
+      <div class="cta rv" data-i="3">
+        <a class="btn" href="{{ url_for('book') }}">Book Soil Collection <span>↗</span></a>
+        <a class="btn" href="{{ url_for('portal') }}">View Live Demo Portal</a>
+      </div>
+      <div class="feat-line rv" data-i="4"><span>5-stage live tracking</span><span>pH · N · P · K readings</span><span>Self-serve booking</span></div>
+    </div>
+    <div class="glass core rv" data-i="3">
+      <div class="core-head"><span>Soil core — loamlab/strata-01</span><i>Lab online</i></div>
+      <div class="hz slide o" style="--i:0"><span>O-Horizon · Organic Humus</span><small>0–5 cm</small></div>
+      <div class="hz slide a" style="--i:1"><span>A-Horizon · Mineral Topsoil</span><small>5–25 cm</small></div>
+      <div class="hz slide b" style="--i:2"><span>B-Horizon · Subsoil</span><small>25–60 cm</small></div>
+      <div class="hz slide c" style="--i:3"><span>C-Horizon · Substratum</span><small>60+ cm</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ STRATA ═════════ -->
+<section class="sec" id="strata"><div class="wrap inner">
+  <div class="eyebrow rv">Depth profiling</div>
+  <h2 class="title gt">Soil Horizon Strata Diagnostics</h2>
+  <p class="sub rv" data-i="1">Comprehensive depth profiling from surface leaf litter down to parent bedrock. Select a horizon to explore it.</p>
+  <div class="strata-grid">
+    <div class="strata-list rv" id="strata-list" data-i="2">
+      <div class="hz o" data-h="o"><span>0 · Organic Humus</span><small>0–5 cm</small></div>
+      <div class="hz a sel" data-h="a"><span>A · Mineral Topsoil</span><small>5–25 cm</small></div>
+      <div class="hz b" data-h="b"><span>B · Subsoil Accumulation</span><small>25–60 cm</small></div>
+      <div class="hz c" data-h="c"><span>C · Parent Substratum</span><small>60+ cm</small></div>
+    </div>
+    <div class="glass hz-detail rv" id="hz-detail" data-i="3">
+      <span class="chip">● Crop root zone</span>
+      <h3>A-Horizon: Mineral Topsoil</h3>
+      <div class="depth">5–25 cm</div>
+      <p>Mixed mineral and humus layer where most roots and microbes live. Typical lab focus for available N, P, K, pH and organic carbon.</p>
+      <a class="linkarrow" href="{{ url_for('book') }}">Get a report like this <span>↗</span></a>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═════════ PROCESS ═════════ -->
+<section class="sec" id="process"><div class="wrap inner">
+  <div class="eyebrow rv">Process flow</div>
+  <h2 class="title gt">How a request moves<br>through the lab</h2>
+  <div class="steps">
+    <div class="step rv" style="--c:#ffd277;--i:0"><div class="ic">▤</div><small>Stage 1</small><b>Requested</b><p>Customer submits the booking form.</p></div>
+    <div class="step rv" style="--c:#27d3e6;--i:1"><div class="ic">✓</div><small>Stage 2</small><b>Confirmed</b><p>Lab confirms details and a collection date.</p></div>
+    <div class="step rv" style="--c:#f2a46d;--i:2"><div class="ic">⛏</div><small>Stage 3</small><b>Sample Collected</b><p>Technician visits the site.</p></div>
+    <div class="step rv" style="--c:#e0793f;--i:3"><div class="ic">⚗</div><small>Stage 4</small><b>In Lab</b><p>Sample is analyzed.</p></div>
+    <div class="step rv" style="--c:#a8e61d;--i:4"><div class="ic">◉</div><small>Stage 5</small><b>Completed</b><p>Report and readings are uploaded.</p></div>
+  </div>
+  <div class="note rv"><b>RULE</b> Customers can cancel only while a request is still “Requested”. Every later stage is controlled by the laboratory.</div>
+</div></section>
+
+<!-- ═════════ DIAGNOSTICS ═════════ -->
+<section class="sec" id="diagnostics"><div class="wrap inner">
+  <div class="eyebrow rv">The portal</div>
+  <h2 class="title gt">One portal. Two roles.<br>Zero phone calls.</h2>
+  <div class="diag-grid">
+    <div class="glass card rv" data-i="1">
+      <span class="chip tag">Live</span>
+      <h3>5-Stage Real-Time Sample Tracker</h3>
+      <p class="muted">Track sample custody from field pickup to lab analysis — every request shows its stage, and its history.</p>
+      <div class="mini-track"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i></i></div>
+      <div class="logline"><div>Collection call placed → lab confirms date</div><div>Technician logs sample received → analysis begins</div></div>
+    </div>
+    <div style="display:grid;gap:22px">
+      <div class="glass card rv" data-i="2">
+        <span class="chip tag">Illustration</span>
+        <h3>Precision N-P-K &amp; pH Readout</h3>
+        <p class="muted">Each report lists measured values with units and lab reference intervals.</p>
+        <div class="readout">
+          <div class="ring" data-p="46"><span>6.5</span><small>PH</small></div>
+          <ul><li><span>N · Nitrogen</span><b>— kg/ha</b></li><li><span>P · Phosphorus</span><b>— kg/ha</b></li><li><span>K · Potassium</span><b>— kg/ha</b></li></ul>
+        </div>
+        <p class="fine">Layout illustration only — real values come from your laboratory report.</p>
+      </div>
+      <div class="glass card rv" data-i="3">
+        <h3>Instant Report Download</h3>
+        <p class="muted" style="margin:0">When the lab releases results, a branded multi-page PDF is available on your dashboard — with charts, interpretation and recommendations.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═════════ QUICK ASSESSMENT ═════════ -->
+<section class="sec" id="assess"><div class="wrap inner qa-grid">
+  <div>
+    <div class="eyebrow rv">Quick assessment</div>
+    <h2 class="title gt">Soil Health Quick Assessment</h2>
+    <p class="sub rv" data-i="1">Select your crop type and field observations to get an instant diagnostic hypothesis — then book the right panel in under a minute.</p>
+    <div class="qa-photo imgcard rv" data-i="2"><div class="ph" style="height:100%"><img src="{{ url_for('static',filename='img/soil-hand.jpg') }}" alt="Close-up of crumbly soil held in a hand" loading="lazy"></div></div>
+  </div>
+  <form class="glass qa-box rv" id="qa" data-i="2" onsubmit="return false">
+    <div class="selrow">
+      <label>Crop type<select name="crop"><option>Grain</option><option>Vegetables</option><option>Orchard / Plantation</option><option>Pulses</option><option>Sugarcane</option><option>Pasture</option></select></label>
+      <label>Yield quality<select name="yield"><option>Poor</option><option selected>Average</option><option>Good</option></select></label>
+      <label>Soil moisture<select name="moisture"><option>Dry</option><option selected>Moist</option><option>Waterlogged</option></select></label>
+    </div>
+    <div class="reco" id="reco">
+      <span class="chip">🌱 Recommended panel</span>
+      <h3>Standard Fertility Panel</h3>
+      <div class="params">pH · EC · OC · N · P · K</div>
+      <p>For grain on reasonable ground, the Standard Fertility Panel is the usual starting point. Covers soil reaction, salinity, organic carbon and the three major nutrients — the usual starting point for routine crop planning.</p>
+      <a class="btn sm" href="{{ url_for('book') }}?panel=Standard%20Fertility%20Panel">Book this panel ↗</a>
+    </div>
+    <p class="fine">Indicative booking guidance only — not a diagnosis. Your laboratory interprets actual measurements.</p>
+  </form>
+</div></section>
+
+<!-- ═════════ PORTAL ═════════ -->
+<section class="sec" id="portal"><div class="wrap inner">
+  <div class="eyebrow rv">Dual portal workflow</div>
+  <h2 class="title gt">Two roles, one login,<br>one place to check progress.</h2>
+  <div class="portal-grid">
+    <article class="pcard imgcard rv" data-i="1">
+      <div class="ph"><img src="{{ url_for('static',filename='img/lab-beakers.jpg') }}" alt="Seedlings growing in laboratory beakers" loading="lazy"></div>
+      <div class="body"><h3>Customer Portal</h3><p class="tagline">Book appointments, track status, download reports.</p>
+        <ul><li>Book a soil test in under a minute</li><li>Watch the request move stage by stage</li><li>Download the finished report with readings</li></ul>
+        <a class="linkarrow" href="{{ url_for('login',role='customer') }}">Open customer portal <span>↗</span></a></div>
+    </article>
+    <article class="pcard imgcard rv" data-i="2">
+      <div class="ph"><img src="{{ url_for('static',filename='img/lab-growlight.jpg') }}" alt="Laboratory grow-light bay" loading="lazy"></div>
+      <div class="body"><h3>Lab Admin Console</h3><p class="tagline">Confirm dates, update status, upload results.</p>
+        <ul><li>See every request in one list</li><li>Set collection dates and advance stages</li><li>Enter results and issue the PDF report</li></ul>
+        <a class="linkarrow" href="{{ url_for('login',role='admin') }}">Enter admin console <span>↗</span></a></div>
+    </article>
+  </div>
+  <div class="cols-feat">
+    <div><div class="eyebrow plain rv">Shipped</div>
+      <ul class="feature-list stagger"><li>Account creation and login for customers and admins</li><li>Appointment booking with a five-stage status lifecycle</li><li>Admin tools to update stages and issue reports</li><li>Secure report upload and download with lab readings</li></ul></div>
+    <div><div class="eyebrow plain rv">What's next</div>
+      <ul class="feature-list soon stagger"><li>Email or SMS notifications on status changes</li><li>Online payment at the time of booking</li><li>Multiple lab locations and technician scheduling</li></ul></div>
+  </div>
+</div></section>
+{% endblock %}
+
+{% block wordmark %}
+<div class="wordmark"><svg viewBox="0 0 1500 330" role="img" aria-label="LOAMLAB"><text x="750" y="270" text-anchor="middle">LOAMLAB</text></svg></div>
+{% endblock %}

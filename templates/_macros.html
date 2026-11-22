@@ -1,0 +1,29 @@
+{% macro badge(status) %}<span class="badge b-{{ status|lower|replace(' ','') }}">{{ status }}</span>{% endmacro %}
+
+{% macro track(status, pct) %}
+{% if status=='Cancelled' %}<div class="cancelled-note">■ Cancelled</div>
+{% else %}
+<div class="track" role="img" aria-label="Stage: {{ status }}">
+  <div class="fill" data-w="{{ pct }}"></div>
+  {% set cur = TRACK.index(status) if status in TRACK else 0 %}
+  {% for s in TRACK %}<div class="node {{ 'd' if loop.index0<=cur }} {{ 'cur' if loop.index0==cur }}" style="--i:{{ loop.index0 }}"><i></i><b>{{ s }}</b></div>{% endfor %}
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro results(view, interp) %}
+<div class="results">
+  <div class="rhead"><span class="eyebrow">Laboratory readings</span></div>
+  {% if view.ph %}
+  <div class="rrow" style="margin-top:0"><div class="lab"><span>pH</span><span>{{ view.ph.value }} / 14</span></div>
+    <div class="phbar"><div class="mark" data-left="{{ view.ph.left }}"></div></div>
+    <div class="scale"><span>0 · acidic</span><span>7 · neutral</span><span>14 · alkaline</span></div></div>
+  {% endif %}
+  {% for b in view.bars %}
+  <div class="rrow c{{ loop.index }}"><div class="lab"><span>{{ b.name }}</span><span>{{ b.value }} {{ b.unit }}</span></div><div class="bar"><i data-w="{{ b.pct }}"></i></div></div>
+  {% endfor %}
+  {% if view.bars|length>1 %}<p class="fine">Bars are relative to the largest of N, P and K (all in kg/ha) — not a fertility score.</p>{% endif %}
+  {% if view.chips %}<div class="chipgrid">{% for c in view.chips %}<div class="vchip"><small>{{ c.name }}</small><b>{{ c.value }}</b><em>{{ c.unit }}</em></div>{% endfor %}</div>{% endif %}
+  {% if interp %}<div class="interp">{{ interp }}</div>{% endif %}
+</div>
+{% endmacro %}

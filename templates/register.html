@@ -1,0 +1,23 @@
+{% extends 'base.html' %}{% block title %}Create account | LoamLab{% endblock %}
+{% block chrome_top %}{% endblock %}{% block chrome_bottom %}{% endblock %}{% block flashes %}{% endblock %}
+{% block content %}
+<div class="split">
+  <div class="pane">
+    <a class="back" href="{{ url_for('login') }}">← Back to sign in</a>
+    <a class="brand rv" href="{{ url_for('home') }}" style="margin-bottom:30px">{% from 'base.html' import logo %}{{ logo() }}<span>Loam<b>Lab</b></span></a>
+    <div class="eyebrow rv" data-i="1">Customer portal</div>
+    <h1 class="gt">Create your<br>account.</h1>
+    <p class="muted rv" data-i="2">Your secure space for soil test bookings and reports.</p>
+    {% with messages=get_flashed_messages(with_categories=true) %}{% for category,message in messages %}<div class="flash {{ category }}" style="max-width:420px;margin-top:18px">{{ message }}</div>{% endfor %}{% endwith %}
+    <form method="post" class="rv" data-i="3">
+      <label>Full name<input name="name" required></label>
+      <label>Email address<input name="email" type="email" required></label>
+      <label>Phone number<input name="phone" type="tel"></label>
+      <label>Password · minimum 8 characters<input name="password" type="password" minlength="8" required></label>
+      <button class="btn block">Create account ↗</button>
+    </form>
+    <p class="alt">Already registered? <a href="{{ url_for('login',role='customer') }}">Sign in</a></p>
+  </div>
+  <div class="photo"><img src="{{ url_for('static',filename='img/soil-hand.jpg') }}" alt="Soil held in a hand"></div>
+</div>
+{% endblock %}

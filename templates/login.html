@@ -1,0 +1,31 @@
+{% extends 'base.html' %}{% block title %}Sign in | LoamLab{% endblock %}
+{% block chrome_top %}{% endblock %}{% block chrome_bottom %}{% endblock %}{% block flashes %}{% endblock %}
+{% block content %}
+<div class="split">
+  <div class="pane">
+    <a class="back" href="{{ url_for('home') }}"><h2>← Home</h2></a><br> <br>
+    <a class="brand rv" href="{{ url_for('home') }}" style="margin-bottom:34px">{% from 'base.html' import logo %}{{ logo() }}<span>Loam<b>Lab</b></span></a>
+    <div class="eyebrow rv" data-i="1">Secure sign in</div>
+    <h1 class="gt">Welcome back.</h1>
+    <p class="muted rv" data-i="2">Enter your details, choose how you are signing in, and we will take you to the right workspace.</p>
+    {% with messages=get_flashed_messages(with_categories=true) %}{% for category,message in messages %}<div class="flash {{ category }}" style="max-width:420px;margin-top:18px">{{ message }}</div>{% endfor %}{% endwith %}
+    <form method="post" class="rv" data-i="3">
+      <label>Email<input name="email" type="email" required autocomplete="username" placeholder="you@example.com"></label>
+      <label>Password<input name="password" type="password" required autocomplete="current-password" placeholder="••••••••"></label>
+      <div class="rolepick" role="radiogroup" aria-label="Sign in as">
+        <span class="rolelabel">Sign in as</span>
+        <label class="roleopt"><input type="radio" name="role" value="customer" {{ 'checked' if role!='admin' }}><span>Customer</span></label>
+        <label class="roleopt"><input type="radio" name="role" value="admin" {{ 'checked' if role=='admin' }}><span>Lab Admin</span></label>
+      </div>
+      <button class="btn block">Sign in ↗</button>
+      {% if DEMO %}<div class="demo"><small>Demo accounts · tap to fill</small><br>
+        <button type="button" data-fill-email="farmer@loamlab.local" data-fill-pass="Farmer@123" data-fill-role="customer">Customer · Ravi</button>
+        <button type="button" data-fill-email="admin@loamlab.local" data-fill-pass="LabAdmin@123" data-fill-role="admin">Lab Admin</button>
+        <div class="creds">Customer: farmer@loamlab.local / Farmer@123<br>Admin: admin@loamlab.local / LabAdmin@123</div></div>{% endif %}
+    </form>
+    <p class="alt">New here? <a href="{{ url_for('register') }}">Create a customer account</a></p>
+  </div>
+  <div class="photo"><img src="{{ url_for('static',filename='img/soil-image.jpg') }}" alt="Soil held in a hand"></div>
+</div>
+{% endblock %}
+
