@@ -1,8 +1,9 @@
+venv/
 .venv/
 __pycache__/
-data/*.sqlite3
-uploads/*
-generated_reports/*
+*.pyc
 .env
-fonts/*.ttf
-gunicorn
+instance/
+*.db
+*.sqlite3
+uploads/
