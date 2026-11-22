@@ -5,3 +5,4 @@ uploads/*
 generated_reports/*
 .env
 fonts/*.ttf
+gunicorn
